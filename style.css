@@ -1,0 +1,31 @@
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#login-form,
+#register-form {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 100px auto;
+  background-size: cover;
+  background-position: center;
+}
+
+#login-form {
+  background-image: url("images/login-background.jpg");
+}
+
+#register-form {
+  background-image: url("images/register-background.jpg");
+}
+.card {
+  background: rgba(255, 255, 255, 0.6);
+}
