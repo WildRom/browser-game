@@ -13,6 +13,8 @@ $current_port = $player->current_port;
 
 $ports = R::findAll('ports');
 $goods = R::findAll('goods', 'port = ?', [$current_port]);
+
+$class =  strtolower(R::load('ports', $current_port)->name);
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +22,13 @@ $goods = R::findAll('goods', 'port = ?', [$current_port]);
 
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <title>Trading Ships Game</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="<?= $class; ?>">
   <div class="container">
     <h1 class="text-center my-4">Trading Ships Game</h1>
     <div class="text-right mb-3">
@@ -35,9 +38,12 @@ $goods = R::findAll('goods', 'port = ?', [$current_port]);
       <div class="card-body">
         <p>Gold: <?php echo $player->gold; ?> coins</p>
         <p>Ship Capacity: <?php echo $player->ship_capacity; ?> tons</p>
-        <p>Current Port: <?php echo R::load('ports', $current_port)->name; ?></p>
+        <p>Current Port: <span id="current-port"><?php echo R::load('ports', $current_port)->name; ?></span></p>
       </div>
     </div>
+
+
+    <!-- TODO #market - Display none for a while, edit later-->
     <div id="market" class="card mb-4">
       <div class="card-body">
         <h2>Market in <?php echo R::load('ports', $current_port)->name; ?></h2>
@@ -56,11 +62,11 @@ $goods = R::findAll('goods', 'port = ?', [$current_port]);
               <td><?php echo $good->buy_price; ?> coins</td>
               <td>
                 <?php
-                                    $sell_prices = R::findAll('goods', 'name = ? AND port != ?', [$good->name, $current_port]);
-                                    foreach ($sell_prices as $sell_price) {
-                                        echo R::load('ports', $sell_price->port)->name . ": " . $sell_price->sell_price . " coins<br>";
-                                    }
-                                    ?>
+                  $sell_prices = R::findAll('goods', 'name = ? AND port != ?', [$good->name, $current_port]);
+                  foreach ($sell_prices as $sell_price) {
+                      echo R::load('ports', $sell_price->port)->name . ": " . $sell_price->sell_price . " coins<br>";
+                  }
+                ?>
               </td>
             </tr>
             <?php endforeach; ?>
@@ -68,8 +74,12 @@ $goods = R::findAll('goods', 'port = ?', [$current_port]);
         </table>
       </div>
     </div>
+    <!-- end of #market -->
+
+
     <div id="ports" class="row">
       <?php foreach($ports as $port): ?>
+      <?php if ($port->id == $current_port) continue; ?>
       <div class="col-md-4 mb-4">
         <div class="card">
           <div class="card-body">
