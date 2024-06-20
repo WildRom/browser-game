@@ -30,11 +30,11 @@ $class =  strtolower(R::load('ports', $current_port)->name);
 
 <body class="<?= $class; ?>">
   <div class="container">
-    <h1 class="text-center my-4">Trading Ships Game</h1>
-    <div class="text-right mb-3">
+    <div class="container-fluid player-info text-right my-3">
       <a href="logout.php" class="btn btn-secondary">Logout</a>
     </div>
-    <div id="player-info" class="card mb-4">
+    <h1 class="text-center my-4">Trading Ships Game</h1>
+    <div id="player-info" class="card text-white bg-dark mb-4">
       <div class="card-body">
         <p>Gold: <?php echo $player->gold; ?> coins</p>
         <p>Ship Capacity: <?php echo $player->ship_capacity; ?> tons</p>
@@ -81,7 +81,7 @@ $class =  strtolower(R::load('ports', $current_port)->name);
       <?php foreach($ports as $port): ?>
       <?php if ($port->id == $current_port) continue; ?>
       <div class="col-md-4 mb-4">
-        <div class="card">
+        <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title"><?php echo htmlspecialchars($port->name); ?></h5>
             <form method="POST" action="travel.php">

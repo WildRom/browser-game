@@ -7,6 +7,10 @@ body {
   background-repeat: no-repeat;
 }
 
+.player-info {
+  border-bottom: solid 1px red;
+}
+
 .england {
   background-image: url("ports/England_port.jpg");
 }
@@ -71,7 +75,8 @@ body {
   background-image: url("images/register-background.jpg");
 }
 .card {
-  background: rgba(255, 255, 255, 0.6);
+  /* background: rgba(255, 255, 255, 0.6); */
+  opacity: 0.6;
 }
 #current-port {
   font-weight: bold;
