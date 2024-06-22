@@ -8,13 +8,44 @@ if (!isset($_SESSION['player_id'])) {
 }
 
 $player_id = $_SESSION['player_id'];
+R::debug(false);
 $player = R::load('players', $player_id);
 $current_port = $player->current_port;
 
 $ports = R::findAll('ports');
+$portName = $ports[$current_port]->name;
 $goods = R::findAll('goods', 'port = ?', [$current_port]);
 
-$class =  strtolower(R::load('ports', $current_port)->name);
+// Example arrival time from the database
+$estimated_arrival_time = $player->arriving_time; // assuming $travel_hours is calculated
+
+// Convert time to player's timezone
+$player_timezone = new DateTimeZone($player->timezone);
+$server_timezone = new DateTimeZone(date_default_timezone_get());
+
+
+$datetime = new DateTime('@' . $estimated_arrival_time);
+$datetime->setTimezone($server_timezone); // first set it to the server's timezone
+$datetime->setTimezone($player_timezone); // then convert to player's timezone
+
+if($player->arriving_time > time()) {
+  $rand = rand(1, 35);
+  $image ='departed/departed'.$rand.'.jpg';
+  // $portName = 'Sailed to ' . $portName. '. Estimated arrival time: ' . date('Y-m-d H:i', $player->arriving_time);
+  $portName = 'Sailed to ' . $portName. '. Estimated arrival time: ' . $datetime->format('Y-m-d H:i');;
+} else {  
+  $image =  R::load('ports', $current_port)->name .'_port.jpg';
+  // Update player's current port, destination, and travel status
+  $player->destination = 0;
+  $player->departed = 0;
+  $player->departure_time = 0; // Current timestamp for departure time
+  $player->arriving_time = 0;
+  R::store($player);
+}
+
+// $temp = $twig->loadTemplate('index.html');
+// echo $temp->render(array());
+// die;
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +59,9 @@ $class =  strtolower(R::load('ports', $current_port)->name);
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="<?= $class; ?>">
+<!-- departed28.jpg very nice -->
+
+<body style="background-image: url(ports/<?php echo $image; ?>);">
   <div class="container">
     <div class="container-fluid player-info text-right my-3">
       <a href="logout.php" class="btn btn-secondary">Logout</a>
@@ -38,7 +71,7 @@ $class =  strtolower(R::load('ports', $current_port)->name);
       <div class="card-body">
         <p>Gold: <?php echo $player->gold; ?> coins</p>
         <p>Ship Capacity: <?php echo $player->ship_capacity; ?> tons</p>
-        <p>Current Port: <span id="current-port"><?php echo R::load('ports', $current_port)->name; ?></span></p>
+        <p>Current Port: <span id="current-port"><?php echo $portName; ?></span></p>
       </div>
     </div>
 
@@ -75,8 +108,7 @@ $class =  strtolower(R::load('ports', $current_port)->name);
       </div>
     </div>
     <!-- end of #market -->
-
-
+    <?php if($player->departed == 0 && $player->destination == 0 && ($player->arriving_time <= $player->departure_time)):?>
     <div id="ports" class="row">
       <?php foreach($ports as $port): ?>
       <?php if ($port->id == $current_port) continue; ?>
@@ -94,6 +126,10 @@ $class =  strtolower(R::load('ports', $current_port)->name);
       </div>
       <?php endforeach; ?>
     </div>
+    <?php endif; ?>
+    <!-- // end of #ports -->
+
+
   </div>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

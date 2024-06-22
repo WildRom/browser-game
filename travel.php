@@ -21,24 +21,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destination_id'])) {
     // Fetch destination details
     $destination = R::load('ports', $destination_id);
     
-    // *************************** THIS PART DISABLED FOR TESTING PURPOSES ***************************
+    // *************************** THIS PART SHOULD BE COMMENTED FOR TESTING PURPOSES ***************************
     // Update player's current port, destination, and travel status
     // $player->current_port = 0; // Assuming 0 represents "en route"
-    // $player->destination = $destination_id;
-    // $player->departed = 1;
-    // $player->departure_time = time(); // Current timestamp for departure time
+    $player->current_port = $destination_id;
+    $player->destination = $destination_id;
+    $player->departed = 1;
+    $player->departure_time = time(); // Current timestamp for departure time
 
     // Calculate arriving time (example: add 5 hours to departure time)
     //TODO calculate properly arriving time
-    // $arriving_time = strtotime('+5 hours', $player->departure_time);
-    // $player->arriving_time = $arriving_time;
+    $arriving_time = strtotime('+1 minute', $player->departure_time);
+    $player->arriving_time = $arriving_time;
     // *************************** THIS IS END OF PART DISABLED FOR TESTING PURPOSES ***************************
 
-    // THIS PART IS TESTING ONLY. DO NOT USE IT IN PRODUCTION.
-    $player->current_port = $destination_id;
-    // THIS IS END OF PART FOR TESTING .
-
-        // Store changes in database
+    
+    // Store changes in database
     R::store($player);
 
     // Redirect to index.php or another page after processing

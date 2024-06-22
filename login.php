@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
     <div class="text-center mt-3">
-      <a href="register.php">Don't have an account? Register here</a>
+      <a href="register.php" class="login">Don't have an account? Register here</a>
     </div>
   </div>
 </body>

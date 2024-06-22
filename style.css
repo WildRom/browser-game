@@ -5,6 +5,11 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+label {
+  color: #1f0bc5;
+  font-weight: bold;
 }
 
 .player-info {
@@ -60,6 +65,13 @@ body {
   margin: 100px auto;
   background-size: cover;
   background-position: center;
+}
+.login {
+  color: yellow;
+}
+.login:hover {
+  color: orange;
+  font-size: 1.2em;
 }
 
 /* TODO display none for a while */
