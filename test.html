@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-image: url("images/background.jpg"); /* Add your background image here */
+        background-size: cover;
+        background-position: center;
+        font-family: Arial, sans-serif;
+      }
+
+      .form-container {
+        background: rgba(0, 0, 0, 0.6); /* Black background with 60% opacity */
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        margin: 50px auto;
+        color: #fff; /* White text color */
+      }
+
+      .form-container .form-label {
+        font-weight: bold;
+      }
+
+      .form-container .form-control {
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .form-container .btn-primary {
+        background-color: #4caf50; /* Green button background */
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .form-container .btn-primary:hover {
+        background-color: #45a049; /* Darker green on hover */
+      }
+
+      .error-message {
+        background: rgba(
+          255,
+          0,
+          0,
+          0.6
+        ); /* Red background with 60% opacity for error messages */
+        padding: 10px;
+        border-radius: 5px;
+        color: #fff;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <form id="registerForm" method="POST" action="register.php">
+          <div class="form-group">
+            <label for="nick_name" class="form-label">Nickname:</label>
+            <input
+              type="text"
+              id="nick_name"
+              name="nick_name"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <!-- <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Display error messages
+                if ($existing_nickname) {
+                    echo "<div class='error-message'>Nickname already taken. Please choose another.</div>";
+                } elseif ($existing_email) {
+                    echo "<div class='error-message'>Email already registered. Please use another email.</div>";
+                }
+            }
+            ?> -->
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the client's timezone
+        var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("timezone").value = timezone;
+      });
+    </script>
+  </body>
+</html>

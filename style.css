@@ -66,12 +66,36 @@ label {
   background-size: cover;
   background-position: center;
 }
+.form-label,
+.form-control {
+  background: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.form-control {
+  margin-bottom: 30px;
+}
+
 .login {
-  color: yellow;
+  background: rgba(255, 255, 255, 0.5);
+  /*Whitebackgroundwith70%opacity*/
+  color: rgb(110, 4, 4);
+  text-decoration: underline;
+  padding: 5px 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 .login:hover {
-  color: orange;
-  font-size: 1.2em;
+  color: black;
+  font-weight: bold;
+}
+
+.btn {
+  opacity: 0.8;
 }
 
 /* TODO display none for a while */

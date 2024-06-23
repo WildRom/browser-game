@@ -60,25 +60,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <h1 class="text-center my-4">Register</h1>
     <form method="POST" action="register.php">
       <div class="form-group">
-        <label for="nick_name">Nickname</label>
+        <label for="nick_name" class="form-label">Nickname</label>
         <input type="text" class="form-control" id="nick_name" name="nick_name" required>
       </div>
-
       <!-- Hidden input to store the client's timezone -->
       <input type="hidden" id="timezone" name="timezone">
-
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" required>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Register</button>
+      <button type="submit" class="btn btn-dark btn-block">Register</button>
     </form>
     <div class="text-center mt-3">
-      <a href="login.php" class="login">Already have an account? Login here</a>
+      <a href="login.php" class="login">Already have an account? Login here</a>v>
     </div>
   </div>
   <script>

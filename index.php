@@ -29,7 +29,7 @@ $datetime->setTimezone($server_timezone); // first set it to the server's timezo
 $datetime->setTimezone($player_timezone); // then convert to player's timezone
 
 if($player->arriving_time > time()) {
-  $rand = rand(1, 35);
+  $rand = rand(1, 36);
   $image ='departed/departed'.$rand.'.jpg';
   // $portName = 'Sailed to ' . $portName. '. Estimated arrival time: ' . date('Y-m-d H:i', $player->arriving_time);
   $portName = 'Sailed to ' . $portName. '. Estimated arrival time: ' . $datetime->format('Y-m-d H:i');;

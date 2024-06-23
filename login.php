@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
     <form method="POST" action="login.php">
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" required>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-dark btn-block">Login</button>
     </form>
     <div class="text-center mt-3">
       <a href="register.php" class="login">Don't have an account? Register here</a>
